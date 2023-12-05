@@ -22,6 +22,7 @@ public class CadastrarProjeto {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         Projeto projeto = null;
         Atividade atividade = null;
+        Funcionario funcionarioAtribuido = null;
         LocalDate dataAtual = LocalDate.now();
         LocalDate dataInicialProjeto = LocalDate.now();
         LocalDate dataFinalProjeto = LocalDate.now();
@@ -57,14 +58,14 @@ public class CadastrarProjeto {
 
             do {
                 dataInicialProjeto = TratamentosEntradas.entradaData("Data inicial (dd/MM/yyyy): ", fmt, ler);
-                
+
                 //Verifica se a data infomada está no passado
                 if (dataInicialProjeto.isBefore(dataAtual)) {
                     System.out.println("Você inseriu uma data no passado.");
                     System.out.println(" ");
                 }
             } while (dataInicialProjeto.isBefore(dataAtual));
-            
+
             do {
                 dataFinalProjeto = TratamentosEntradas.entradaData("Data final (dd/MM/yyyy): ", fmt, ler);
 
@@ -83,7 +84,7 @@ public class CadastrarProjeto {
             do {
                 System.out.println("Quantas atividades o projeto terá?");
                 numAtividades = TratamentosEntradas.entradaInt(ler);
-                
+
                 //Limita a quantidade de atividades que podem ser cadastradas
                 if (numAtividades <= 0 || numAtividades > 20) {
                     System.out.println("Insira uma quantidade válida de atividades.");
@@ -127,7 +128,7 @@ public class CadastrarProjeto {
                 do {
                     System.out.println("Quantas ações a atividade terá?");
                     numAcoes = TratamentosEntradas.entradaInt(ler);
-                    
+
                     //Limita a quantidade de ações que podem ser cadastradas
                     if (numAcoes <= 0 || numAcoes > 20) {
                         System.out.println("Insira uma quantidade válida de ações.");
@@ -175,6 +176,7 @@ public class CadastrarProjeto {
                         }
                     } while (dataFinalAcao.compareTo(dataInicialAcao) < 0 || dataFinalAcao.compareTo(dataFinalAtividade) > 0);
 
+                    System.out.println("  ");
                     System.out.println("Funcionários disponíveis para atribuição:");
 
                     //Mostrar lista de funionários cadastrados
@@ -184,18 +186,19 @@ public class CadastrarProjeto {
                         }
                     }
 
-                    // Pedir a matrícula do funcionário para atribuição
-                    System.out.println("Digite a matrícula do funcionário para atribuir à ação:");
-                    int matriculaFuncionario = TratamentosEntradas.entradaInt(ler);
-                    System.out.println(" ");
+                    int matriculaFuncionario;
+                    do {
+                        // Pedir a matrícula do funcionário para atribuição
+                        System.out.println("Digite a matrícula do funcionário para atribuir à ação:");
+                        matriculaFuncionario = TratamentosEntradas.entradaInt(ler);
+                        System.out.println(" ");
 
-                    // Verificar se a matrícula fornecido corresponde a um funcionário cadastrado
-                    Funcionario funcionarioAtribuido = encontrarFuncionario(empresa, matriculaFuncionario);
-                    if (funcionarioAtribuido == null) {
-                        System.out.println("Matrícula de funcionário inválido.");
-                        return projeto;
-                    }
-
+                        // Verificar se a matrícula fornecido corresponde a um funcionário cadastrado
+                        funcionarioAtribuido = encontrarFuncionario(empresa, matriculaFuncionario);
+                        if (funcionarioAtribuido == null) {
+                            System.out.println("Matrícula de funcionário inválido.\n");
+                        }
+                    } while (funcionarioAtribuido == null);
                     int porcentagemConclusaoAcao = 0;
 
                     Acao acao = new Acao(nomeAcao, dataInicialAcao, dataFinalAcao, porcentagemConclusaoAcao, matriculaFuncionario);
@@ -233,7 +236,7 @@ public class CadastrarProjeto {
         }
         return false;
     }
-    
+
     //Método auxiliar para encontrar funcionário
     public static Funcionario encontrarFuncionario(Empresa empresa, int matriculaFuncionario) {
         for (Departamento departamento : empresa.getDepartamentos()) {

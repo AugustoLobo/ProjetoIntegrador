@@ -10,7 +10,7 @@ import java.util.Scanner;
  *
  * @author Augusto Lobo <augustolobo.contato@gmail.com>
  * @date 06/11/2023
- * @brief Class AttProgresso
+ * @brief Class Case5
  */
 public class AttProgresso {
 
@@ -26,7 +26,6 @@ public class AttProgresso {
             System.out.println(" ");
             return;
         }
-        //Busca pela ação
         for (Projeto projeto : empresa.getProjetos()) {
             for (Atividade atividade : projeto.getAtividades()) {
                 for (Acao acao : atividade.getAcoes()) {
@@ -34,7 +33,7 @@ public class AttProgresso {
                         do {
                             System.out.print("\nNovo percentual de conclusão da Ação: ");
                             novaPorcentagem = TratamentosEntradas.entradaInt(ler);
-                            if (novaPorcentagem < 0 || novaPorcentagem > 100) {// Limita entre 0 e 100
+                            if (novaPorcentagem < 0 || novaPorcentagem > 100) {
                                 System.out.println("O percetual deve ser de 0 à 100.");
                             }
                         } while (novaPorcentagem < 0 || novaPorcentagem > 100);

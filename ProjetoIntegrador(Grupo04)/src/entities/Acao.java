@@ -85,6 +85,27 @@ public class Acao {
             System.out.println("Entrada inválida!");
             System.out.println("Entrada deve ser de 0 à 100");
         }
-        
+    }
+    
+    // Método para verificar quanto tempo/percentual de quanto tempo cada ação ficou em cada status
+    public static void mostrarDuracaoPorStatus(Acao acao, Projeto projeto) {
+        // Cálculo da duração total do projeto em dias
+        long projetoDuracao = projeto.getDataFinal().toEpochDay() - projeto.getDataInicial().toEpochDay();
+
+        // Cálculo da duração em diferentes status (em dias)
+        long diasNaoIniciada = acao.getDataInicial().toEpochDay() - projeto.getDataInicial().toEpochDay();
+        long diasEmAndamento = acao.getDataFinal().toEpochDay() - acao.getDataInicial().toEpochDay();
+        long diasConcluida = projeto.getDataFinal().toEpochDay() - acao.getDataFinal().toEpochDay();
+
+        // Cálculo do percentual em diferentes status
+        double percentualNaoIniciada = ((double) diasNaoIniciada / projetoDuracao) * 100;
+        double percentualEmAndamento = ((double) diasEmAndamento / projetoDuracao) * 100;
+        double percentualConcluida = ((double) diasConcluida / projetoDuracao) * 100;
+
+        // Exibição dos resultados
+        System.out.println(" ");
+        System.out.println("      Dias em 'NAO_INICIADA': " + diasNaoIniciada + " dias (" + percentualNaoIniciada + "%)");
+        System.out.println("      Dias em 'EM_ANDAMENTO': " + diasEmAndamento + " dias (" + percentualEmAndamento + "%)");
+        System.out.println("      Dias em 'CONCLUIDA': " + diasConcluida + " dias (" + percentualConcluida + "%)");
     }
 }

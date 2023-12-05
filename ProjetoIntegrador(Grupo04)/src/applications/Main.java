@@ -11,6 +11,8 @@ public class Main {
      * @date 06/11/2023
      * @brief Main Class Main
      */
+    private static boolean empresaCadastrada = false;
+
     private static String login() {
         Scanner ler = new Scanner(System.in);
 
@@ -31,6 +33,10 @@ public class Main {
                 return "Lider";
             } else if (username.equals("funcionario") && password.equals("123")) {
                 return "Funcionario";
+            } else if (username.equals("sair") && password.equals("sair")) {
+                System.out.println("Encerrando programa!");
+                ler.close();
+                System.exit(0);
             } else {
                 System.out.println("Login ou senha inválidos. Por favor, tente novamente.\n");
             }
@@ -62,17 +68,15 @@ public class Main {
                     break;
             }
         } while (!voltar);
+
     }
 
     //Método para caso tenha logado como admin
     private static Empresa admin(Empresa empresa, Scanner ler) {
         int opcao;
         boolean voltar = false;
-        boolean empresaCadastrada = false;
 
         do {
-
-            //Menu com as opções do switch-case
             System.out.println("~Menu Seleção~");
             System.out.println("1 - Cadastrar empresa");
             System.out.println("2 - Cadastrar departamentos/funcionários");
@@ -83,29 +87,26 @@ public class Main {
             System.out.println(" ");
 
             switch (opcao) {
-                case 1://Cadastrar empresa
-                    //Limitador para caso já tenha cadastrado a empresa
-                    if (empresaCadastrada == false) {
+                case 1:
+                    if (!Main.isEmpresaCadastrada()) {
                         empresa = CadastrarEmpresa.cadastrarEmpresa(empresa, ler);
                         empresaCadastrada = true;
                     } else {
-                        System.out.println("\nEmpresa cadastrada. Não é possível cadastrar novamento.\n");
+                        System.out.println("\nEmpresa já cadastrada. Não é possível cadastrar novamente.\n");
                     }
                     break;
-                case 2://Cadastar departamentos e funcionários
-                    //Limitador para que não seja possível cadastrar departamentos/funcionários caso não tenha uma empresa cadastrada
-                    if (empresaCadastrada == true) {
+                case 2:
+                    if (Main.isEmpresaCadastrada()) {
                         empresa = CadastrarDpFun.cadastrarDepartamento(empresa, ler);
                     } else {
                         System.out.println("\nNenhuma empresa cadastrada. Cadastre a empresa primeiro.\n");
                     }
                     break;
-                case 0://Voltar
+                case 0:
                     System.out.println("Voltando ao login.\n");
                     voltar = true;
                     break;
-
-                default://Caso opção escolhida não esteja no menu
+                default:
                     System.out.println("Opção inválida. Tente novamente.");
                     System.out.println(" ");
             }
@@ -235,6 +236,10 @@ public class Main {
         } while (!voltar);
         return empresa;
 
+    }
+
+    public static boolean isEmpresaCadastrada() {
+        return empresaCadastrada;
     }
 
 }

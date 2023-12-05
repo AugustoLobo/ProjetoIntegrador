@@ -46,7 +46,7 @@ public class Relatorio {
                     System.out.println("      Data Final: " + acao.getDataFinal().format(fmt));
                     System.out.println("      Funcionário Atribuído: " + encontrarFuncionario(empresa, acao.getMatriculaFuncionario()));
                     System.out.println("      Progresso: " + acao.getPorcentagemConclusao() + "%" + "(" + acao.getStatus() + ")");
-                    mostrarDuracaoPorStatus(acao, projeto);
+                    acao.mostrarDuracaoPorStatus(acao, projeto);
 
                     System.out.println();
                 }
@@ -64,32 +64,6 @@ public class Relatorio {
             }
         }
         return "Funcionário não encontrado.";
-    }
-
-    //Método para verificar quanto tempo/pecentual de quanto tempo cada ação ficou em cada status
-    private static void mostrarDuracaoPorStatus(Acao acao, Projeto projeto) {
-        LocalDate projetoInicio = projeto.getDataInicial();
-        LocalDate projetoFim = projeto.getDataFinal();
-
-        LocalDate acaoInicio = acao.getDataInicial();
-        LocalDate acaoFim = acao.getDataFinal();
-
-        long umDia = 1;
-
-        long projetoDuracao = (projetoFim.toEpochDay() - projetoInicio.toEpochDay()) * umDia;
-
-        long DiasNaoIniciada = (acaoInicio.toEpochDay() - projetoInicio.toEpochDay()) * umDia;
-        long DiasEmAndamento = (acaoFim.toEpochDay() - acaoInicio.toEpochDay()) * umDia;
-        long DiasConcluida = (projetoFim.toEpochDay() - acaoFim.toEpochDay()) * umDia;
-
-        double naoIniciadaPercentagem = ((double) DiasNaoIniciada / projetoDuracao) * 100;
-        double emAndamentoPercentagem = ((double) DiasEmAndamento / projetoDuracao) * 100;
-        double concluidaPercentagem = ((double) DiasConcluida / projetoDuracao) * 100;
-
-        System.out.println(" ");
-        System.out.println("      Dias em 'NAO_INICIADA': " + DiasNaoIniciada + " dias (" + naoIniciadaPercentagem + "%)");
-        System.out.println("      Dias em 'EM_ANDAMENTO': " + DiasEmAndamento + " dias (" + emAndamentoPercentagem + "%)");
-        System.out.println("      Dias em 'CONCLUIDA': " + DiasConcluida + " dias (" + concluidaPercentagem + "%)");
     }
 
 }

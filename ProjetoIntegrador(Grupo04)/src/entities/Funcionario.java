@@ -3,7 +3,7 @@ package entities;
 /**
  *
  * @author Augusto Lobo <augustolobo.contato@gmail.com>
- * @date 07/11/2023
+ * @date 06/11/2023
  * @brief Class Funcionario
  */
 public class Funcionario {
