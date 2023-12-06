@@ -52,8 +52,9 @@ public class Tabela {
     }
 
     private static void imprimirTabela(String titulo, List<Acao> acoes, Empresa empresa) {
+        System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println(titulo);
-        System.out.println("--------------------------------------------------------------------------------------------------------------------");
+        System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.printf("%-20s %-20s %-20s %-20s %-50s\n", "Nome", "Data Inicial", "Data Final", "Funcionário", "Progresso");
 
         for (Acao acao : acoes) {

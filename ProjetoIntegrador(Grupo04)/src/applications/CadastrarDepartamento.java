@@ -11,7 +11,7 @@ import java.util.Scanner;
  * @date 07/11/2023
  * @brief Class CadastrarDpFun
  */
-public class CadastrarDpFun {
+public class CadastrarDepartamento {
 
     public static Empresa cadastrarDepartamento(Empresa empresa, Scanner ler) {
         int numDepartamentos = 0;

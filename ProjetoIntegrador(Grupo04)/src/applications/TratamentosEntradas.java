@@ -50,6 +50,7 @@ public class TratamentosEntradas {
             if (entrada.isEmpty()) {
                 System.out.println("Erro!");
                 System.out.println("Insira uma entrada válida.");
+                System.out.println(" ");
             }
 
         } while (entrada.isEmpty());

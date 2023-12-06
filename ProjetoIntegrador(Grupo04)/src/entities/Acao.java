@@ -86,7 +86,7 @@ public class Acao {
             System.out.println("Entrada deve ser de 0 à 100");
         }
     }
-    
+
     // Método para verificar quanto tempo/percentual de quanto tempo cada ação ficou em cada status
     public static void mostrarDuracaoPorStatus(Acao acao, Projeto projeto) {
         // Cálculo da duração total do projeto em dias
@@ -104,8 +104,8 @@ public class Acao {
 
         // Exibição dos resultados
         System.out.println(" ");
-        System.out.println("      Dias em 'NAO_INICIADA': " + diasNaoIniciada + " dias (" + percentualNaoIniciada + "%)");
-        System.out.println("      Dias em 'EM_ANDAMENTO': " + diasEmAndamento + " dias (" + percentualEmAndamento + "%)");
-        System.out.println("      Dias em 'CONCLUIDA': " + diasConcluida + " dias (" + percentualConcluida + "%)");
+        System.out.printf("      Dias em 'NAO_INICIADA': %d dias (%.2f%%)%n", diasNaoIniciada, percentualNaoIniciada);
+        System.out.printf("      Dias em 'EM_ANDAMENTO': %d dias (%.2f%%)%n", diasEmAndamento, percentualEmAndamento);
+        System.out.printf("      Dias em 'CONCLUIDA': %d dias (%.2f%%)%n", diasConcluida, percentualConcluida);
     }
 }

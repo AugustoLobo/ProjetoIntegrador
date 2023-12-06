@@ -21,10 +21,8 @@ public class Main {
 
         //Lastro do login
         do {
-            System.out.println("Login: ");
-            username = ler.nextLine();
-            System.out.println("Senha: ");
-            password = ler.nextLine();
+            username = TratamentosEntradas.entradaString("Login: ", ler);
+            password = TratamentosEntradas.entradaString("Senha: ", ler);
             System.out.println(" ");
 
             if (username.equals("admin") && password.equals("123")) {
@@ -77,7 +75,7 @@ public class Main {
         boolean voltar = false;
 
         do {
-            System.out.println("~Menu Seleção~");
+            System.out.println("~Menu de Admin~");
             System.out.println("1 - Cadastrar empresa");
             System.out.println("2 - Cadastrar departamentos/funcionários");
             System.out.println("0 - Voltar");
@@ -97,7 +95,7 @@ public class Main {
                     break;
                 case 2:
                     if (Main.isEmpresaCadastrada()) {
-                        empresa = CadastrarDpFun.cadastrarDepartamento(empresa, ler);
+                        empresa = CadastrarDepartamento.cadastrarDepartamento(empresa, ler);
                     } else {
                         System.out.println("\nNenhuma empresa cadastrada. Cadastre a empresa primeiro.\n");
                     }
@@ -122,7 +120,7 @@ public class Main {
         do {
 
             //Menu com as opções do switch-case
-            System.out.println("~Menu Seleção~");
+            System.out.println("~Menu de Líder~");
             System.out.println("1 - Cadastrar projetos/atividades/ações");
             System.out.println("2 - Mudar data final da ação");
             System.out.println("3 - Atribuir outro funcionário a uma ação");
@@ -188,7 +186,7 @@ public class Main {
         do {
 
             //Menu com as opções do switch-case
-            System.out.println("~Menu Seleção~");
+            System.out.println("~Menu de Funcionário~");
             System.out.println("1 - Atualizar progresso de uma ação");
             System.out.println("2 - Tabela");
             System.out.println("3 - Relatório");
